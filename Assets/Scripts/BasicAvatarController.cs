@@ -77,6 +77,28 @@ public class BasicAvatarController : MonoBehaviour
             Quaternion localRotTowardsRootTransform = MoCapAvatar.applyRelativeRotationChange(jt, initialModelJointRotations[jt]);
             // ...therefore we have to multiply it with the RootTransform Rotation to get the global rotation of the joint
             knownJoints[jt].rotation = RootTransform.rotation * localRotTowardsRootTransform;
+
+            //new
+            if (jt.Equals(JointType.SpineBase))
+            {
+                knownJoints[jt].position = MoCapAvatar.getRawWorldPosition(jt);
+                Vector3 posHipLeft = MoCapAvatar.getRawWorldPosition(JointType.HipLeft);
+                Vector3 posHipRight = MoCapAvatar.getRawWorldPosition(JointType.HipRight);
+                Vector3 hipVector = posHipLeft - posHipRight;
+                float hipAngle = Vector3.SignedAngle(hipVector,Vector3.right,Vector3.down);
+                Debug.Log("HipAngle " + hipAngle);
+                knownJoints[jt].eulerAngles = new Vector3(0,hipAngle,0);
+            }
+
+
         }
+
+        /*foreach (JointType jt in fromToJoints.Keys)
+        {
+            //transforms[jt].rotation = getRawWorldRotation(jt);
+            jointTransforms[jt].position = getRawWorldPosition(jt);
+            // debug: show computed rotatations
+            jointTransforms[jt].rotation = applyRelativeRotationChange(jt, Quaternion.identity);
+        }*/
     }
 }
