@@ -11,6 +11,9 @@ public class MassManager : MonoBehaviour
 
     private Vector3 footing;
 
+    public GameObject hoverBoardController;
+    public float mul;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +34,12 @@ public class MassManager : MonoBehaviour
         }
 
         this.transform.position = sumPosition / sumMass;
+     
+
 
         footing = (footLeft.position + footRight.position)/2;
-
-
+        Vector3 relPos = this.transform.position - footing;
+        hoverBoardController.transform.localPosition = new Vector3(relPos.x,mul,relPos.z);
 
     }
 

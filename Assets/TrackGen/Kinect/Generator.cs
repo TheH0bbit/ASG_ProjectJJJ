@@ -13,6 +13,8 @@ public class Generator : MonoBehaviour {
 
     public int vorlauf;
 
+    public GameObject hoverboard;
+
     public Transform nextSpawnpoint;
     // Use this for initialization
     void Start () {
@@ -31,25 +33,39 @@ public class Generator : MonoBehaviour {
         Strecke.Translate(Vector3.back * Time.deltaTime * speed);
 
 
-        if (Input.GetKey(KeyCode.D))
+        /* if (Input.GetKey(KeyCode.D))
+         {
+             Rotate(rotspeed,1);
+         }
+
+         if (Input.GetKey(KeyCode.A))
+         {
+             Rotate(rotspeed, -1);
+         }
+
+         if (Input.GetKey(KeyCode.W))
+         {
+             ChangeHeight(heightspeed, -1);
+         }
+
+         if (Input.GetKey(KeyCode.S))
+         {
+             ChangeHeight(heightspeed, 1);
+         }
+
+     */
+
+       
+
+        float angle = Vector3.SignedAngle(hoverboard.transform.up, Vector3.up, Vector3.forward);
+        angle = Mathf.Clamp(angle, -30f, 30f);
+        Debug.Log("Angle" + angle);
+        if(angle<2f&& angle > -2f)
         {
-            Rotate(rotspeed,1);
+            angle = 0;
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            Rotate(rotspeed, -1);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            ChangeHeight(heightspeed, -1);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            ChangeHeight(heightspeed, 1);
-        }
+        Rotate(angle);
 
     }
 
@@ -64,18 +80,12 @@ public class Generator : MonoBehaviour {
     }
 
 
-    public void Rotate(float speed, int dir)
+    public void Rotate(float speed)
     {
-
-        if (dir > 0)
-        {
-            Strecke.transform.Rotate(Vector3.back * Time.deltaTime * speed);
-        }
-        else
-        {
-            Strecke.transform.Rotate(Vector3.forward*Time.deltaTime*speed);
-        }
-
+      
+            Strecke.transform.Rotate(Vector3.back * Time.deltaTime * (speed *-4));
+      
+   
 
     }
 
