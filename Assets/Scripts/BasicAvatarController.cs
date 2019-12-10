@@ -71,6 +71,7 @@ public class BasicAvatarController : MonoBehaviour
     // Update rotation of all known joints
     public virtual void Update()
     {
+
         foreach (JointType jt in knownJoints.Keys)
         {
             // the applyRelativeRotationChange function returns the new "local rotation" relative to the RootTransform Rotation...
@@ -86,10 +87,11 @@ public class BasicAvatarController : MonoBehaviour
                 Vector3 posHipRight = MoCapAvatar.getRawWorldPosition(JointType.HipRight);
                 Vector3 hipVector = posHipLeft - posHipRight;
                 float hipAngle = Vector3.SignedAngle(hipVector,Vector3.right,Vector3.down);
-                Debug.Log("HipAngle " + hipAngle);
+                //Debug.Log("HipAngle " + hipAngle);
                 knownJoints[jt].eulerAngles = new Vector3(0,hipAngle,0);
             }
 
+            //Debug.Log(MoCapAvatar.getRawWorldPosition(JointType.AnkleLeft).y);
 
         }
 

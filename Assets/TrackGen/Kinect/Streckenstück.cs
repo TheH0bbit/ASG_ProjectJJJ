@@ -44,7 +44,7 @@ public class Streckenstück : MonoBehaviour {
     {
         if (other.gameObject.tag == "Deathplane") {
 
-            Debug.Log("Trigger");
+            //Debug.Log("Trigger");
             DestroyThis();
                 }
     }

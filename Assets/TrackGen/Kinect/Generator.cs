@@ -59,7 +59,6 @@ public class Generator : MonoBehaviour {
 
         float angle = Vector3.SignedAngle(hoverboard.transform.up, Vector3.up, Vector3.forward);
         angle = Mathf.Clamp(angle, -30f, 30f);
-        Debug.Log("Angle" + angle);
         if(angle<2f&& angle > -2f)
         {
             angle = 0;

@@ -152,6 +152,7 @@ public class KinectPointManAvatarModel : BasicAvatarModel
             // debug: show computed rotatations
             jointTransforms[jt].rotation = applyRelativeRotationChange(jt, Quaternion.identity);
         }
+
     }
 
     public virtual Vector3 getJointDirection(JointType jt)
