@@ -14,6 +14,7 @@ public class RobotCharacterController : BasicAvatarController
     public Transform leftElbowObj = null;
     public Transform hip = null;
     public float footOffset = 0.2f;
+    public float hipOffset;
     //public Transform debugCube;
 
     public override void Start()
@@ -57,17 +58,20 @@ public class RobotCharacterController : BasicAvatarController
         Vector3 posHipRight;
         Vector3 hipRightVector;
 
-        hip.position = MoCapAvatar.getRawWorldPosition(JointType.SpineBase);
+        Vector3 hipPosition = MoCapAvatar.getRawWorldPosition(JointType.SpineBase);
+        
+        hip.position = new Vector3(0,hipPosition.y+hipOffset,0);
         //Vector3 handRightDelta = MoCapAvatar.getRawWorldPosition(JointType.HandRight) - rightHandObj.position;
         //TODO nice to have: smooth inputs
-        rightHandObj.position = MoCapAvatar.getRawWorldPosition(JointType.HandRight);
-        leftHandObj.position = MoCapAvatar.getRawWorldPosition(JointType.HandLeft);
-        rightElbowObj.position = MoCapAvatar.getRawWorldPosition(JointType.ElbowRight);
-        leftElbowObj.position = MoCapAvatar.getRawWorldPosition(JointType.ElbowLeft);
-        rightKneeObj.position = MoCapAvatar.getRawWorldPosition(JointType.KneeRight);
-        leftKneeObj.position = MoCapAvatar.getRawWorldPosition(JointType.KneeLeft);
-        rightFootObj.position = MoCapAvatar.getRawWorldPosition(JointType.FootRight) + new Vector3(0,-footOffset,0);
-        leftFootObj.position = MoCapAvatar.getRawWorldPosition(JointType.FootLeft) + new Vector3(0, -footOffset, 0);
+        hipPosition.y = -hipOffset;
+        rightHandObj.position = MoCapAvatar.getRawWorldPosition(JointType.HandRight)-hipPosition;
+        leftHandObj.position = MoCapAvatar.getRawWorldPosition(JointType.HandLeft) - hipPosition;
+        //rightElbowObj.position = MoCapAvatar.getRawWorldPosition(JointType.ElbowRight) - hipPosition;
+        //leftElbowObj.position = MoCapAvatar.getRawWorldPosition(JointType.ElbowLeft) - hipPosition;
+        //rightKneeObj.position = MoCapAvatar.getRawWorldPosition(JointType.KneeRight) - hipPosition;
+        //leftKneeObj.position = MoCapAvatar.getRawWorldPosition(JointType.KneeLeft) - hipPosition;
+        rightFootObj.position = MoCapAvatar.getRawWorldPosition(JointType.FootRight) + new Vector3(0,-footOffset,0) - hipPosition;
+        leftFootObj.position = MoCapAvatar.getRawWorldPosition(JointType.FootLeft) + new Vector3(0, -footOffset, 0) - hipPosition;
 
         posHipLeft = MoCapAvatar.getRawWorldPosition(JointType.HipLeft);
         posHipRight = MoCapAvatar.getRawWorldPosition(JointType.HipRight);
