@@ -87,15 +87,21 @@ public class RobotCharacterController : BasicAvatarController
         //base.Update();
     }
 
-    /*public void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(posHipLeft,0.02f);
-        Gizmos.DrawSphere(posHipRight, 0.02f);
+       // Gizmos.DrawSphere(posHipLeft,0.02f);
+       // Gizmos.DrawSphere(posHipRight, 0.02f);
         
-        Gizmos.DrawLine(posHipLeft + Vector3.right, posHipRight + Vector3.right);
-    }*/
+       // Gizmos.DrawLine(posHipLeft + Vector3.right, posHipRight + Vector3.right);
+        Gizmos.DrawLine(MoCapAvatar.getRawWorldPosition(JointType.FootRight), MoCapAvatar.getRawWorldPosition(JointType.FootLeft));
+    }
 
 
-
+    public Vector3 GetFootMiddlepoint()
+    {
+      Vector3 vec=  MoCapAvatar.getRawWorldPosition(JointType.FootRight) + MoCapAvatar.getRawWorldPosition(JointType.FootLeft)/2;
+       
+        return vec;
+    }
 
 }

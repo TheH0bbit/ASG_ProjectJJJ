@@ -22,14 +22,48 @@ public class IKControl : MonoBehaviour
 
     public Transform lookObj = null;
 
+    public GameObject leftFootSnap;
+    public GameObject rightFootSnap;
+    public GameObject leftFootSnapCollider;
+    public GameObject rightFootSnapCollider;
+
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
+
     //a callback for calculating IK
     void OnAnimatorIK()
     {
+
+        //TODO check if already snapped
+        //TODO polishing: slerp snap
+        if (leftFootSnapCollider.GetComponent<Collider>().bounds.Contains(leftFootObj.position))
+        {
+            leftFootObj.position = leftFootSnap.transform.position;
+            leftFootObj.eulerAngles = leftFootSnap.transform.parent.eulerAngles;
+        }
+        else if (leftFootSnapCollider.GetComponent<Collider>().bounds.Contains(rightFootObj.position))
+        {
+            rightFootObj.position = leftFootSnap.transform.position;
+            rightFootObj.eulerAngles = leftFootSnap.transform.eulerAngles;
+        }
+
+        if (rightFootSnapCollider.GetComponent<Collider>().bounds.Contains(rightFootObj.position))
+        {
+            rightFootObj.position = rightFootSnap.transform.position;
+            rightFootObj.eulerAngles = rightFootSnap.transform.eulerAngles;
+        }
+        else if (rightFootSnapCollider.GetComponent<Collider>().bounds.Contains(leftFootObj.position))
+        {
+            leftFootObj.position = rightFootSnap.transform.position;
+            leftFootObj.eulerAngles = rightFootSnap.transform.parent.eulerAngles;
+        }
+
+
         if (animator)
         {
 
