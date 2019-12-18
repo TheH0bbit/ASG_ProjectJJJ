@@ -8,6 +8,8 @@ public class GameLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gc.GestureRecognizedInController += OnGestureRecognized;
+        IRelativeGestureSegment[] handsCrossed = { new HandsCrossedSegment1(), new HandsCrossedSegment2()};
+        gc.AddGesture("HandsCrossed", handsCrossed);
         IRelativeGestureSegment[] swipeLeft = { new SwipeToLeftSegment1(), new SwipeToLeftSegment2(), new SwipeToLeftSegment3() };
         gc.AddGesture("SwipeLeft", swipeLeft);
         IRelativeGestureSegment[] waveLeft = { new WaveLeftSegment1(), new WaveLeftSegment2(),
@@ -21,10 +23,15 @@ public class GameLogic : MonoBehaviour {
 
     void OnGestureRecognized(object sender, GestureEventArgs e)
     {
+        if (e.GestureName == "HandsCrossed")
+        {
+            Debug.Log("Cross Recognized");
+
+        }
         if (e.GestureName == "SwipeLeft")
         {
             Debug.Log("Swipe Recognized");
-
+            
         }
         if (e.GestureName == "WaveLeft")
         {
