@@ -5,6 +5,10 @@ using UnityEngine;
 public class Generator : MonoBehaviour {
 
     public GameObject[] StreckenStücke;
+    public float noObstacle;
+    public float dodgeObstacle;
+    public float sectorObstacle;
+    public float hurdleObstacle;
     public Transform Strecke;
 
     public float speed;
@@ -18,12 +22,51 @@ public class Generator : MonoBehaviour {
     public Transform nextSpawnpoint;
     // Use this for initialization
     void Start () {
-        nextSpawnpoint = this.transform;
-        int x = Random.Range(0, StreckenStücke.Length);
+        nextSpawnpoint.position = this.transform.position;
+
+        float k=noObstacle+hurdleObstacle+sectorObstacle+dodgeObstacle;
+       
+
+        if(k >100||k< 100)
+        {
+            Debug.Log("Wahrscheinlichkeiten falsch");
+        }
+
+       
         for (int i = 0; i < vorlauf; i++)
         {
-          GameObject g=  Instantiate(StreckenStücke[x], nextSpawnpoint.position, Quaternion.identity, Strecke);
-            nextSpawnpoint = g.transform.GetChild(0).GetComponent<Streckenstück>().mySpawnpoint;
+            int m = Random.Range(0, 100);
+            int x = -1;
+
+            if (m <= noObstacle)
+            {
+                x = 1;
+            }else if( m <= noObstacle + dodgeObstacle)
+            {
+                x = 0;
+            }else if(m <= noObstacle + dodgeObstacle + hurdleObstacle)
+            {
+                x = 2;
+            }
+            else
+            {
+                x = 3;
+            }
+            
+
+
+
+            Debug.Log("Generate"+x);
+            if (x == 0)
+            {
+                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24);
+            }
+            else
+            {
+                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12);
+            }
+            GameObject g=  Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+        
         }
     }
 	
@@ -70,9 +113,40 @@ public class Generator : MonoBehaviour {
 
     public void SpawnNext()
     {
-        int x = Random.Range(0, StreckenStücke.Length);
-        GameObject g = Instantiate(StreckenStücke[x], nextSpawnpoint.position, Quaternion.identity, Strecke);
-        nextSpawnpoint = g.transform.GetChild(0).GetComponent<Streckenstück>().mySpawnpoint;
+
+        int m = Random.Range(0, 100);
+        int x = -1;
+
+        if (m <= noObstacle)
+        {
+            x = 1;
+        }
+        else if (m <= noObstacle + dodgeObstacle)
+        {
+            x = 0;
+        }
+        else if (m <= noObstacle + dodgeObstacle + hurdleObstacle)
+        {
+            x = 2;
+        }
+        else
+        {
+            x = 3;
+        }
+
+
+
+
+        Debug.Log("Generate"+x);
+        if (x == 0)
+        {
+            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24);
+        }
+        else
+        {
+            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12);
+        }
+        GameObject g = Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
 
 
 
