@@ -60,9 +60,9 @@ public class Generator : MonoBehaviour {
             {
                 x = 3;
             }
-            
 
 
+            x = 1;
 
             Debug.Log("Generate"+x);
             if (x == 0)
@@ -73,7 +73,7 @@ public class Generator : MonoBehaviour {
             {
                 nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12* size);
             }
-            GameObject g=  Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+            GameObject g=  Instantiate(StreckenStücke[1], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
             SpawnCoins(Random.Range(minCoins, maxCoins));
         }
     }

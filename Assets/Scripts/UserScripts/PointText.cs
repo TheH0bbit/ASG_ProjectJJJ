@@ -1,27 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Obstacle : MonoBehaviour
+public class PointText : MonoBehaviour
 {
-    
+    private Text text;
     // Start is called before the first frame update
     void Start()
     {
-        
+        text = this.GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            PauseManager.EndGame();
-        }
+        text.text = ""+PointManager.points;
     }
 }

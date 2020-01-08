@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    public int p;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,8 @@ public class Coin : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Award Points;
+            PointManager.AwardPoints(p);
+            Destroy(gameObject);
         }
     }
 

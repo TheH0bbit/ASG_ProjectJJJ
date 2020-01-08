@@ -23,6 +23,7 @@ public class PauseManager : MonoBehaviour
     public void LoadScene(string scenenName)
     {
         SceneManager.LoadScene(scenenName);
+        PointManager.points = 0;
 
     }
 
@@ -32,11 +33,13 @@ public class PauseManager : MonoBehaviour
         if (paused)
         {
             //unPause
+            Time.timeScale = 1;
             paused = false;
         }
         else
         {
             //Pause
+            Time.timeScale = 0;
             paused = true;
         }
     }
@@ -53,6 +56,12 @@ public class PauseManager : MonoBehaviour
             Pause();
         }
 
+    }
+
+
+    public static void EndGame()
+    {
+        SceneManager.LoadScene("EndScene");
     }
 
 
