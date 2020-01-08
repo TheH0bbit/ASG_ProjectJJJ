@@ -4,6 +4,7 @@ using System.Collections;
 public class GameLogic : MonoBehaviour {
 
     public GestureController gc;
+    public PauseManager pauseManager;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,8 @@ public class GameLogic : MonoBehaviour {
 
         IRelativeGestureSegment[] pullLeft = { new PullToLeftSegment1(), new PullToLeftSegment2(), new PullToLeftSegment3(), };
         gc.AddGesture("PullLeft", pullLeft);
+
+        pauseManager = GameObject.FindObjectOfType<PauseManager>();
 	}
 
     void OnGestureRecognized(object sender, GestureEventArgs e)
@@ -26,6 +29,7 @@ public class GameLogic : MonoBehaviour {
         if (e.GestureName == "Pause")
         {
             Debug.Log("Game Paused");
+            pauseManager.DoGesture();
 
         }
         if (e.GestureName == "SwipeLeft")

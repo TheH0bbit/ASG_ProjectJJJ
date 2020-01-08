@@ -78,7 +78,7 @@ public class PauseSegment3 : IRelativeGestureSegment
         if (handLeft.y > head.y && handRight.y > head.y)
         {
             //hands together
-            if ((handLeft - handRight).magnitude > 0.15f)
+            if ((handLeft - handRight).magnitude < 0.15f)
             {
                 return GesturePartResult.Succeed;
             }

@@ -25,6 +25,8 @@ public class Generator : MonoBehaviour {
     public float coinHeightAbweichung;
     public int minCoins;
     public int maxCoins;
+
+    public float size;
     
     // Use this for initialization
     void Start () {
@@ -65,11 +67,11 @@ public class Generator : MonoBehaviour {
             Debug.Log("Generate"+x);
             if (x == 0)
             {
-                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24);
+                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24* size);
             }
             else
             {
-                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12);
+                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12* size);
             }
             GameObject g=  Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
             SpawnCoins(Random.Range(minCoins, maxCoins));
@@ -113,7 +115,7 @@ public class Generator : MonoBehaviour {
             angle = 0;
         }
 
-        //Rotate(angle);
+         Rotate(angle);
 
     }
 
@@ -146,11 +148,11 @@ public class Generator : MonoBehaviour {
         Debug.Log("Generate"+x);
         if (x == 0)
         {
-            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24);
+            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24* size);
         }
         else
         {
-            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12);
+            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12* size);
         }
         GameObject g = Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
         SpawnCoins(Random.Range(minCoins,maxCoins));

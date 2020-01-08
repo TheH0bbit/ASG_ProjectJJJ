@@ -57,13 +57,12 @@ public class RobotCharacterController : BasicAvatarController
         Vector3 posHipLeft;
         Vector3 posHipRight;
         Vector3 hipRightVector;
-        float LerpP = 0.5f;
+        float LerpP = 0.3f;
 
         Vector3 hipPosition = MoCapAvatar.getRawWorldPosition(JointType.SpineBase);
         
         hip.position = new Vector3(0,hipPosition.y+hipOffset,0);
         //Vector3 handRightDelta = MoCapAvatar.getRawWorldPosition(JointType.HandRight) - rightHandObj.position;
-        //TODO nice to have: smooth inputs
         hipPosition.y = -hipOffset;
 
         //rightHandObj.position = MoCapAvatar.getRawWorldPosition(JointType.HandRight)-hipPosition;
@@ -100,7 +99,7 @@ public class RobotCharacterController : BasicAvatarController
        // Gizmos.DrawSphere(posHipRight, 0.02f);
         
        // Gizmos.DrawLine(posHipLeft + Vector3.right, posHipRight + Vector3.right);
-        Gizmos.DrawLine(MoCapAvatar.getRawWorldPosition(JointType.FootRight), MoCapAvatar.getRawWorldPosition(JointType.FootLeft));
+       //Gizmos.DrawLine(MoCapAvatar.getRawWorldPosition(JointType.FootRight), MoCapAvatar.getRawWorldPosition(JointType.FootLeft));
     }
 
 

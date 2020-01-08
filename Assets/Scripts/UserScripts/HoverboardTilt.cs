@@ -43,9 +43,10 @@ public class HoverboardTilt : MonoBehaviour
 
         if(footRight.transform.position.y < footLeft.transform.position.y)
         {
+            //min height to avoid shaking
             if(footRight.transform.position.y < 0f)
             {
-                return -0.1f;
+                return -0.11f;
             }
             return footRight.transform.position.y;
         }
@@ -53,7 +54,7 @@ public class HoverboardTilt : MonoBehaviour
         {
             if (footLeft.transform.position.y < 0f)
             {
-                return -0.1f;
+                return -0.11f;
             }
             return footLeft.transform.position.y;
         }
