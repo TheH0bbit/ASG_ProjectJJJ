@@ -43,23 +43,27 @@ public class IKControl : MonoBehaviour
         //TODO polishing: slerp snap
         if (leftFootSnapCollider.GetComponent<Collider>().bounds.Contains(leftFootObj.position))
         {
-            leftFootObj.position = leftFootSnap.transform.position;
+            //leftFootObj.position = leftFootSnap.transform.position;
+            leftFootObj.position = Vector3.Lerp(leftFootObj.position, leftFootSnap.transform.position, 0.1f);
             leftFootObj.eulerAngles = leftFootSnap.transform.parent.eulerAngles;
         }
         else if (leftFootSnapCollider.GetComponent<Collider>().bounds.Contains(rightFootObj.position))
         {
-            rightFootObj.position = leftFootSnap.transform.position;
+            //rightFootObj.position = leftFootSnap.transform.position;
+            rightFootObj.position = Vector3.Lerp(rightFootObj.position, leftFootSnap.transform.position, 0.1f);
             rightFootObj.eulerAngles = leftFootSnap.transform.eulerAngles;
         }
 
         if (rightFootSnapCollider.GetComponent<Collider>().bounds.Contains(rightFootObj.position))
         {
-            rightFootObj.position = rightFootSnap.transform.position;
+            //rightFootObj.position = rightFootSnap.transform.position;
+            rightFootObj.position = Vector3.Lerp(rightFootObj.position, rightFootSnap.transform.position, 0.1f);
             rightFootObj.eulerAngles = rightFootSnap.transform.eulerAngles;
         }
         else if (rightFootSnapCollider.GetComponent<Collider>().bounds.Contains(leftFootObj.position))
         {
-            leftFootObj.position = rightFootSnap.transform.position;
+            //leftFootObj.position = rightFootSnap.transform.position;
+            leftFootObj.position = Vector3.Lerp(leftFootObj.position, rightFootSnap.transform.position, 0.1f);
             leftFootObj.eulerAngles = rightFootSnap.transform.parent.eulerAngles;
         }
 

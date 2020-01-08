@@ -21,12 +21,8 @@ public class HoverboardTilt : MonoBehaviour
     {
         //this.transform.forward = charCon.GetFootVector();
 
-
-
-       
-        this.transform.position = new Vector3(this.transform.position.x,getLowestPoint().y-offset , this.transform.position.z);
-
-
+        //this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x,getLowestPointY()-offset , this.transform.position.z), 0.8f);
+        this.transform.position = new Vector3(this.transform.position.x, getLowestPointY() - offset, this.transform.position.z);
     }
 
 
@@ -42,16 +38,24 @@ public class HoverboardTilt : MonoBehaviour
     }
 
 
-    public Vector3 getLowestPoint()
+    public float getLowestPointY()
     {
 
         if(footRight.transform.position.y < footLeft.transform.position.y)
         {
-            return footRight.transform.position;
+            if(footRight.transform.position.y < 0f)
+            {
+                return -0.1f;
+            }
+            return footRight.transform.position.y;
         }
         else
         {
-            return footLeft.transform.position;
+            if (footLeft.transform.position.y < 0f)
+            {
+                return -0.1f;
+            }
+            return footLeft.transform.position.y;
         }
 
     }
