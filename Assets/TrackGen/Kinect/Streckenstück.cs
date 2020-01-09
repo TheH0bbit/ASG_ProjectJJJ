@@ -7,6 +7,7 @@ public class Streckenstück : MonoBehaviour {
    
     
     public Generator gen;
+    public bool noObstacle;
  
 
 	// Use this for initialization
@@ -21,13 +22,17 @@ public class Streckenstück : MonoBehaviour {
        // this.transform.parent.Translate(Vector3.back * Time.deltaTime * speed);
        if(this.transform.position.z < -10)
         {
+            
             DestroyThis();
         }
     }
 
     public void DestroyThis()
     {
-        gen.SpawnNext();
+        if (!noObstacle)
+        {
+            gen.SpawnNext();
+        }
         Destroy(this.gameObject);
     }
 

@@ -16,23 +16,38 @@ public class Generator : MonoBehaviour {
     public float heightspeed;
 
     public int vorlauf;
+    public int leerVorlauf;
 
     public GameObject hoverboard;
 
     public Transform nextSpawnpoint;
 
     public GameObject Coin;
-    public float coinHeightAbweichung;
+    public float coinHeightDown;
+    public float coinHeightMiddle;
+    public float coinHeightUp;
     public int minCoins;
     public int maxCoins;
 
     public float size;
+
+    public int schwierigkeitsgrad=0;
+    public float timebetweenDifficulty;
+    private float time = 0;
     
     // Use this for initialization
     void Start () {
         nextSpawnpoint.position = this.transform.position;
 
-        float k=noObstacle+hurdleObstacle+sectorObstacle+dodgeObstacle;
+
+       for (int i = 0; i < leerVorlauf-3; i++){
+
+            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12 * size);
+            GameObject g = Instantiate(StreckenStücke[1], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+        }
+
+
+        float k=hurdleObstacle+sectorObstacle+dodgeObstacle;
        
 
         if(k >100||k< 100)
@@ -43,38 +58,9 @@ public class Generator : MonoBehaviour {
        
         for (int i = 0; i < vorlauf; i++)
         {
-            int m = Random.Range(0, 100);
-            int x = -1;
+            SpawnNext();
 
-            if (m <= noObstacle)
-            {
-                x = 1;
-            }else if( m <= noObstacle + dodgeObstacle)
-            {
-                x = 0;
-            }else if(m <= noObstacle + dodgeObstacle + hurdleObstacle)
-            {
-                x = 2;
-            }
-            else
-            {
-                x = 3;
-            }
-
-
-            x = 1;
-
-            Debug.Log("Generate"+x);
-            if (x == 0)
-            {
-                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24* size);
-            }
-            else
-            {
-                nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12* size);
-            }
-            GameObject g=  Instantiate(StreckenStücke[1], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
-            SpawnCoins(Random.Range(minCoins, maxCoins));
+           
         }
     }
 	
@@ -83,29 +69,16 @@ public class Generator : MonoBehaviour {
 
         Strecke.Translate(Vector3.back * Time.deltaTime * speed);
 
+        if (schwierigkeitsgrad < 3)
+        {
+            time += Time.deltaTime;
+            if (time > timebetweenDifficulty)
+            {
+                schwierigkeitsgrad++;
 
-        /* if (Input.GetKey(KeyCode.D))
-         {
-             Rotate(rotspeed,1);
-         }
-
-         if (Input.GetKey(KeyCode.A))
-         {
-             Rotate(rotspeed, -1);
-         }
-
-         if (Input.GetKey(KeyCode.W))
-         {
-             ChangeHeight(heightspeed, -1);
-         }
-
-         if (Input.GetKey(KeyCode.S))
-         {
-             ChangeHeight(heightspeed, 1);
-         }
-
-     */
-
+                time = 0;
+            }
+        }
        
 
         float angle = Vector3.SignedAngle(hoverboard.transform.up, Vector3.up, Vector3.forward);
@@ -125,15 +98,12 @@ public class Generator : MonoBehaviour {
         int m = Random.Range(0, 100);
         int x = -1;
 
-        if (m <= noObstacle)
-        {
-            x = 1;
-        }
-        else if (m <= noObstacle + dodgeObstacle)
+      
+        if (m <=  dodgeObstacle)
         {
             x = 0;
         }
-        else if (m <= noObstacle + dodgeObstacle + hurdleObstacle)
+        else if (m <= dodgeObstacle + hurdleObstacle)
         {
             x = 2;
         }
@@ -142,8 +112,44 @@ public class Generator : MonoBehaviour {
             x = 3;
         }
 
+       
+
+        switch (schwierigkeitsgrad)
+        {
+            case 0:
+
+                for(int i=0; i <3; i++)
+                {
+                    nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12 * size);
+                     Instantiate(StreckenStücke[1], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+                    SpawnCoins(Random.Range(minCoins, maxCoins));
+                }
+
+                break;
+
+            case 1:
+                for (int i = 0; i < 2; i++)
+                {
+                    nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12 * size);
+                   Instantiate(StreckenStücke[1], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+                    SpawnCoins(Random.Range(minCoins, maxCoins));
+                }
+                break;
+
+            case 2:
+                for (int i = 0; i < 1; i++)
+                {
+                    nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12 * size);
+                   Instantiate(StreckenStücke[1], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+                    SpawnCoins(Random.Range(minCoins, maxCoins));
+                }
+                break;
 
 
+
+
+
+        }
 
         Debug.Log("Generate"+x);
         if (x == 0)
@@ -154,7 +160,27 @@ public class Generator : MonoBehaviour {
         {
             nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12* size);
         }
-        GameObject g = Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+        GameObject g= Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
+      //  g.transform.RotateAround(Vector3.forward, Random.RandomRange(0, 58) * 6.206896f);
+
+        int y = Random.Range(0, 3);
+        Debug.Log(x);
+        switch (y)
+        {
+            case 0:
+                g.transform.Rotate(Vector3.forward, 6.3f);
+                break;
+
+            case 1:
+                g.transform.Rotate(Vector3.forward, 12.6f);
+                break;
+
+            case 2:
+                g.transform.Rotate(Vector3.forward, 18.8f);
+                break;
+            
+        }
+        
         SpawnCoins(Random.Range(minCoins,maxCoins));
 
 
@@ -196,7 +222,25 @@ public class Generator : MonoBehaviour {
             GameObject c = Instantiate(Coin, nextSpawnpoint.position, Quaternion.identity, Strecke);
 
             c.transform.RotateAround(Vector3.forward, Random.RandomRange(0, 36*2)*5);
-            c.transform.GetChild(0).transform.localPosition += new Vector3(0, Random.Range(-coinHeightAbweichung, coinHeightAbweichung));
+
+            int x = Random.Range(0, 3);
+            Debug.Log(x);
+            switch (x)
+            {
+                case 0:
+                    c.transform.GetChild(0).transform.localPosition += new Vector3(0,coinHeightDown,0);
+                    break;
+
+                case 1:
+                    c.transform.GetChild(0).transform.localPosition += new Vector3(0, coinHeightMiddle, 0);
+                    break;
+
+                case 2:
+                    c.transform.GetChild(0).transform.localPosition += new Vector3(0, coinHeightUp, 0);
+                    break;
+            }
+
+           
         }
     }
 
