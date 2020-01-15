@@ -6,11 +6,12 @@ ToDo:
 Dokumentation!!
 
 
-Streckengenerierung aufteilen - Joshua1
+//Streckengenerierung aufteilen - Joshua1
 Musik & Sound - 
-Polishing Menu - 
+//Polishing Menu - 
 Partikeleffekte - 
-Animation Tod/Pause, PauseOverlay - 
+Animation Tod
+//Pause, PauseOverlay - 
 Schwierigkeit(Geschwindigkeit, Generierung) - 
 Debug-Scripts - 
 

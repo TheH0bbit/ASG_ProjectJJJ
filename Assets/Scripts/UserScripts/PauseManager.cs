@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class PauseManager : MonoBehaviour
 {
 
     public bool paused;
     public bool menu;
+    public GameObject panel;
+    public Text pauseText;
+   // private Generator gen;
     // Start is called before the first frame update
     void Start()
     {
-        
+        panel.SetActive(false);
+        pauseText.text = "Pause";
     }
 
     // Update is called once per frame
@@ -32,16 +36,36 @@ public class PauseManager : MonoBehaviour
     {
         if (paused)
         {
-            //unPause
-            Time.timeScale = 1;
-            paused = false;
+           //unPause
+           // Time.timeScale = 1;
+
+            StartCoroutine("Countdown");
         }
         else
         {
             //Pause
+            panel.SetActive(true);
             Time.timeScale = 0;
             paused = true;
         }
+    }
+
+    IEnumerator Countdown()
+    {
+        int x = 3;
+        while (x > 0)
+        {
+            pauseText.text = "" + x;
+            Debug.Log("davor");
+            yield return new WaitForSecondsRealtime(1f);
+            x -= 1;
+            Debug.Log("danach");
+        }
+        paused = false;
+        pauseText.text = "Pause";
+        panel.SetActive(false);
+        Time.timeScale = 1;
+
     }
 
 
