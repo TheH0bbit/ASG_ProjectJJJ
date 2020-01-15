@@ -18,7 +18,7 @@ public class Generator : MonoBehaviour {
     public int vorlauf;
     public int leerVorlauf;
 
-    public GameObject hoverboard;
+    public GameObject Sphere;
 
     public Transform nextSpawnpoint;
 
@@ -34,6 +34,8 @@ public class Generator : MonoBehaviour {
     public int schwierigkeitsgrad=0;
     public float timebetweenDifficulty;
     private float time = 0;
+
+    public MassManager mass;
     
     // Use this for initialization
     void Start () {
@@ -79,16 +81,17 @@ public class Generator : MonoBehaviour {
                 time = 0;
             }
         }
-       
 
-        float angle = Vector3.SignedAngle(hoverboard.transform.up, Vector3.up, Vector3.forward);
+
+        /*float angle = Vector3.SignedAngle(.transform.up, Vector3.up, Vector3.forward);
         angle = Mathf.Clamp(angle, -30f, 30f);
         if(angle<2f&& angle > -2f)
         {
             angle = 0;
-        }
+        }*/
 
-         Rotate(angle);
+        float factor = 30;
+        Rotate(mass.getCoMVector().x * factor);
 
     }
 

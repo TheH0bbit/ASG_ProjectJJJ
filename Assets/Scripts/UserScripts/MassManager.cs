@@ -14,6 +14,8 @@ public class MassManager : MonoBehaviour
     public GameObject hoverBoardController;
     public float mul;
 
+    Vector3 relPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,14 +35,19 @@ public class MassManager : MonoBehaviour
             sumMass += j.mass;
         }
 
-        this.transform.position = sumPosition / sumMass;
+        this.transform.position = Vector3.Lerp(this.transform.position, sumPosition / sumMass, 0.7f);
      
 
 
         footing = (footLeft.position + footRight.position)/2;
-        Vector3 relPos = this.transform.position - footing;
+        relPos = this.transform.position - footing;
         hoverBoardController.transform.localPosition = new Vector3(relPos.x,mul,relPos.z);
 
+    }
+
+    public Vector3 getCoMVector()
+    {
+        return relPos;
     }
 
     public void OnDrawGizmos()

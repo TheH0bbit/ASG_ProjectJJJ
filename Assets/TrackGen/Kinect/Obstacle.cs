@@ -24,8 +24,8 @@ public class Obstacle : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player.SetActive(false);
-            manager.EndGame();
+            //player.SetActive(false);
+            //manager.EndGame();
             
         }
     }

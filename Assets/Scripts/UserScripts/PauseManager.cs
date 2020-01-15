@@ -84,7 +84,7 @@ public class PauseManager : MonoBehaviour
     }
 
 
-    public  void EndGame()
+    public void EndGame()
     {
         Instantiate(effect, this.transform.position, Quaternion.identity);
 
