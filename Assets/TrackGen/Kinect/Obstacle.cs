@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    PauseManager manager;
+    private GameObject player;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        manager = GameObject.FindObjectOfType<PauseManager>();
+        player = GameObject.Find("ybot@T-Pose");
     }
 
     // Update is called once per frame
@@ -21,7 +24,9 @@ public class Obstacle : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PauseManager.EndGame();
+            player.SetActive(false);
+            manager.EndGame();
+            
         }
     }
 }

@@ -10,6 +10,7 @@ public class PauseManager : MonoBehaviour
     public bool menu;
     public GameObject panel;
     public Text pauseText;
+    public GameObject effect;
    // private Generator gen;
     // Start is called before the first frame update
     void Start()
@@ -83,9 +84,10 @@ public class PauseManager : MonoBehaviour
     }
 
 
-    public static void EndGame()
+    public  void EndGame()
     {
-        SceneManager.LoadScene("EndScene");
+        Instantiate(effect, this.transform.position, Quaternion.identity);
+
     }
 
 
