@@ -15,14 +15,20 @@ public class PauseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        panel.SetActive(false);
-        pauseText.text = "Pause";
+        panel.SetActive(true);
+        Time.timeScale = 0;
+        paused = true;
+        StartCoroutine(Countdown());
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            DoGesture();
+        }
     }
 
     public void LoadScene(string scenenName)

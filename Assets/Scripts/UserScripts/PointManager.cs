@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PointManager : MonoBehaviour
 {
-
+    public static int lives = 3;
     public static int points=0;
+    private static bool invincible = false;
+    private static PauseManager manager;
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        manager = GameObject.FindObjectOfType<PauseManager>();
+        player = GameObject.Find("ybot@T-Pose");
         StartCoroutine("Points",1f);
     }
 
@@ -32,7 +37,46 @@ public class PointManager : MonoBehaviour
 
         }
 
+    }
 
+    public void Invincible()
+    {
+        if(!invincible && lives > 0)
+        {
+            invincible = true;
+            StartCoroutine(Blink());
+        }
+        
+    }
+        
+    public static void ReduceLives()
+    {
+        if(!invincible)
+            lives--;
+        
+        if (lives <= 0)
+        {
+            manager.EndGame();
+        }
+        
+    }
 
+    IEnumerator Blink()
+    {
+        int x = 6;
+        while(x >0){
+            x--;
+
+            player.SetActive(!player.active);
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
+        invincible = false;
+
+    }
+
+    public static void Reset()
+    {
+        points = 0;
+        lives = 3;
     }
 }

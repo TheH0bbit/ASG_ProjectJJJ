@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    PauseManager manager;
+    private PointManager manager;
     private GameObject player;
     
     // Start is called before the first frame update
     void Start()
     {
-        manager = GameObject.FindObjectOfType<PauseManager>();
+        manager = GameObject.FindObjectOfType<PointManager>();
         player = GameObject.Find("ybot@T-Pose");
     }
 
@@ -24,8 +24,10 @@ public class Obstacle : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //player.SetActive(false);
-            //manager.EndGame();
+            PointManager.ReduceLives();
+            manager.Invincible();
+            player.SetActive(false);
+           
             
         }
     }

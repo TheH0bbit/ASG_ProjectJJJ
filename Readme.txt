@@ -13,15 +13,17 @@ Musik & Sound -
 //Animation Tod
 //Pause, PauseOverlay - 
 Schwierigkeit(//Geschwindigkeit, //Generierung) - 
-Debug-Scripts - 
+//Debug-Scripts - 
+
+better snap
 
 nice to have
 Gameplay erweiterung - 
 Powerups - 
-Mehrere Leben
+//Mehrere Leben
 	LSD
 Innenröhre - 
-Start-Animation - 
+//Start-Animation - 
 Höhe - 
 
 

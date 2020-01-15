@@ -11,6 +11,7 @@ public class HighscoreText : MonoBehaviour
     {
         text = this.GetComponent<Text>();
         text.text = "" + PointManager.points;
+        PointManager.Reset();
     }
 
     // Update is called once per frame

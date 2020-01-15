@@ -13,6 +13,7 @@ public class MassManager : MonoBehaviour
 
     public GameObject hoverBoardController;
     public float mul;
+    public bool debug;
 
     Vector3 relPos;
 
@@ -43,6 +44,10 @@ public class MassManager : MonoBehaviour
         relPos = this.transform.position - footing;
         hoverBoardController.transform.localPosition = new Vector3(relPos.x,mul,relPos.z);
 
+        if (debug)
+        {
+            relPos = new Vector3(Input.GetAxis("Horizontal")*0.5f,0,0);
+        }
     }
 
     public Vector3 getCoMVector()
