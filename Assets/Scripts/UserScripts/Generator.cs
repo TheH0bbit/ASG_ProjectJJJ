@@ -157,7 +157,7 @@ public class Generator : MonoBehaviour {
         Debug.Log("Generate"+x);
         if (x == 0)
         {
-            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 24* size);
+            nextSpawnpoint.position = nextSpawnpoint.position + new Vector3(0, 0, 12* size);
         }
         else
         {
@@ -166,22 +166,25 @@ public class Generator : MonoBehaviour {
         GameObject g= Instantiate(StreckenStücke[x], nextSpawnpoint.position, nextSpawnpoint.rotation, Strecke);
       //  g.transform.RotateAround(Vector3.forward, Random.RandomRange(0, 58) * 6.206896f);
 
-        int y = Random.Range(0, 3);
+        int y = Random.Range(0, 4);
         Debug.Log(x);
         switch (y)
         {
             case 0:
-                g.transform.Rotate(Vector3.forward, 6.3f);
+                g.transform.Rotate(Vector3.forward, 6f);
                 break;
 
             case 1:
-                g.transform.Rotate(Vector3.forward, 12.6f);
+                g.transform.Rotate(Vector3.forward, 12f);
                 break;
 
             case 2:
-                g.transform.Rotate(Vector3.forward, 18.8f);
+                g.transform.Rotate(Vector3.forward, 18f);
                 break;
-            
+            case 3:
+                g.transform.Rotate(Vector3.forward, 24f);
+                break;
+
         }
         
         SpawnCoins(Random.Range(minCoins,maxCoins));
