@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PointManager : MonoBehaviour
 {
-    public static int lives = 300;
+    public static int lives = 3;
     public static int points=0;
     private static bool invincible = false;
     private static PauseManager manager;

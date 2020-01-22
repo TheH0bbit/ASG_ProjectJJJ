@@ -15,7 +15,7 @@ public class IKStartPose : MonoBehaviour
     public bool anim = true;
     float weight = 0.0f;
 
-    bool weightUp = true;
+    //bool weightUp = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,23 +27,11 @@ public class IKStartPose : MonoBehaviour
         if (!anim)
             return;
 
-        if (weightUp)
-        {
-            weight += Time.deltaTime;
+            weight += Time.deltaTime * 0.6f;
             if(weight >= 1)
             {
-                weight = 1;
-                weightUp = false;
-            }
-        }
-        else{
-            weight -= Time.deltaTime;
-            if (weight <= 0)
-            {
                 weight = 0;
-                weightUp = true;
             }
-        }
     }
 
     void OnAnimatorIK()

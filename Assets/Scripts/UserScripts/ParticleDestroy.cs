@@ -12,7 +12,16 @@ public class ParticleDestroy : MonoBehaviour
     void Start()
     {
         particle = this.GetComponent<ParticleSystem>();
-     
+        if (player)
+        {
+            
+            var sh = particle.shape;
+            sh.enabled = true;
+            sh.shapeType = ParticleSystemShapeType.SkinnedMeshRenderer;
+            sh.skinnedMeshRenderer = GameObject.Find("Alpha_Surface").GetComponent<SkinnedMeshRenderer>();
+            GameObject.Find("ybot@T-Pose").SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
