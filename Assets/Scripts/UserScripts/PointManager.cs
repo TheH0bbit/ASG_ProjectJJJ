@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PointManager : MonoBehaviour
 {
-    public static int lives = 3;
+    public static int lives = 300;
     public static int points=0;
     private static bool invincible = false;
     private static PauseManager manager;
     private GameObject player;
     private AudioSource audioSource;
+    public int leben;
+    public bool unbesiegbar;
+    private bool isBlinking=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,8 @@ public class PointManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        leben = lives;
+        unbesiegbar = invincible;
     }
 
     public static void AwardPoints(int point)
@@ -48,7 +52,10 @@ public class PointManager : MonoBehaviour
         {
             invincible = true;
             audioSource.Play();
-            StartCoroutine(Blink());
+            if (!isBlinking)
+            {
+                StartCoroutine(Blink());
+            }
         }
         
     }
@@ -69,15 +76,26 @@ public class PointManager : MonoBehaviour
 
     IEnumerator Blink()
     {
+        isBlinking = true;
         int x = 6;
         while(x >0){
-            x--;
+            x = x - 1; ;
 
-            player.SetActive(!player.active);
-            yield return new WaitForSecondsRealtime(0.5f);
+            if (player.activeSelf)
+            {
+                player.SetActive(false);
+            }
+            else
+            {
+                player.SetActive(true);
+            }
+
+
+           
+            yield return new WaitForSecondsRealtime(0.3f);
         }
         invincible = false;
-
+        isBlinking = false;
     }
 
     public static void Reset()

@@ -15,7 +15,10 @@ public class PauseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        panel.SetActive(true);
+        if (panel != null)
+        {
+            panel.SetActive(true);
+        }
         Time.timeScale = 0;
         paused = true;
         StartCoroutine(Countdown());
@@ -62,15 +65,24 @@ public class PauseManager : MonoBehaviour
         int x = 3;
         while (x > 0)
         {
-            pauseText.text = "" + x;
+            if (pauseText != null)
+            {
+                pauseText.text = "" + x;
+            }
             Debug.Log("davor");
             yield return new WaitForSecondsRealtime(1f);
             x -= 1;
             Debug.Log("danach");
         }
         paused = false;
-        pauseText.text = "Pause";
-        panel.SetActive(false);
+        if (pauseText != null)
+        {
+            pauseText.text = "Pause";
+        }
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
         Time.timeScale = 1;
 
     }

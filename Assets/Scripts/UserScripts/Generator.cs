@@ -9,9 +9,12 @@ public class Generator : MonoBehaviour {
     public float dodgeObstacle;
     public float sectorObstacle;
     public float hurdleObstacle;
+    public float GestureObstacle;
     public Transform Strecke;
 
     public float speed;
+    public float speedfactor;
+    public AnimationCurve speedfac;
     public float rotspeed;
     public float heightspeed;
 
@@ -49,7 +52,7 @@ public class Generator : MonoBehaviour {
         }
 
 
-        float k=hurdleObstacle+sectorObstacle+dodgeObstacle;
+        float k=hurdleObstacle+sectorObstacle+dodgeObstacle+GestureObstacle;
        
 
         if(k >100||k< 100)
@@ -93,6 +96,7 @@ public class Generator : MonoBehaviour {
         float factor = 30;
         Rotate(mass.getCoMVector().x * factor);
 
+        speed = speedfac.Evaluate(Time.time);
     }
 
     public void SpawnNext()
@@ -110,9 +114,13 @@ public class Generator : MonoBehaviour {
         {
             x = 2;
         }
-        else
+        else if(m <= dodgeObstacle + hurdleObstacle+sectorObstacle)
         {
             x = 3;
+        }
+        else
+        {
+            x = 4;
         }
 
        
@@ -147,6 +155,7 @@ public class Generator : MonoBehaviour {
                     SpawnCoins(Random.Range(minCoins, maxCoins));
                 }
                 break;
+           
 
 
 

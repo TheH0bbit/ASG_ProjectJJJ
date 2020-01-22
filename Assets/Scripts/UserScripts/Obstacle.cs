@@ -26,7 +26,7 @@ public class Obstacle : MonoBehaviour
         {
             PointManager.ReduceLives();
             manager.Invincible();
-            player.SetActive(false);
+           // player.SetActive(false);
            
             
         }
