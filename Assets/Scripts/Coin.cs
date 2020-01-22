@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
 {
     public int p;
     public GameObject effect;
+    
     // Start is called before the first frame update
     void Start()
     {

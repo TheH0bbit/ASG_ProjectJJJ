@@ -9,11 +9,14 @@ public class PointManager : MonoBehaviour
     private static bool invincible = false;
     private static PauseManager manager;
     private GameObject player;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+      
         manager = GameObject.FindObjectOfType<PauseManager>();
         player = GameObject.Find("ybot@T-Pose");
+        audioSource = this.GetComponent<AudioSource>();
         StartCoroutine("Points",1f);
     }
 
@@ -44,6 +47,7 @@ public class PointManager : MonoBehaviour
         if(!invincible && lives > 0)
         {
             invincible = true;
+            audioSource.Play();
             StartCoroutine(Blink());
         }
         
@@ -51,9 +55,11 @@ public class PointManager : MonoBehaviour
         
     public static void ReduceLives()
     {
-        if(!invincible)
+        if (!invincible)
+        {
             lives--;
-        
+            
+        }
         if (lives <= 0)
         {
             manager.EndGame();
